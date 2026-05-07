@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="Sociolla – Platform Kecantikan No. 1 Indonesia" />
+    <title>Sociolla – Beauty for Everyone</title>
+
+    <!-- Font Awesome -->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+    <!-- AOS Animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+
+    <style>
+        /* ── DESIGN TOKENS ─────────────────────────────── */
+        :root {
+            --primary:        #E8417F;
+            --primary-light:  #F472A8;
+            --primary-dark:   #C2185B;
+            --primary-pale:   #FFF0F6;
+            --primary-soft:   #FFD6E8;
+            --rose-bg:        #FDF4F8;
+            --pink-card:      #FFF5FA;
+            --white:          #FFFFFF;
+            --text-dark:      #2A1A22;
+            --text-mid:       #6B4D5A;
+            --text-muted:     #A07A8E;
+            --border:         rgba(232,65,127,0.15);
+            --shadow-sm:      0 2px 16px rgba(232,65,127,0.08);
+            --shadow-md:      0 8px 32px rgba(232,65,127,0.14);
+            --shadow-lg:      0 20px 56px rgba(232,65,127,0.20);
+            --font-display:   'Playfair Display', Georgia, serif;
+            --font-body:      'DM Sans', sans-serif;
+            --radius-sm:      10px;
+            --radius-md:      16px;
+            --radius-lg:      24px;
+            --radius-pill:    999px;
+        }
+
+        /* ── RESET & BASE ──────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: var(--white);
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4 { font-family: var(--font-display); }
+        a { text-decoration: none; }
+        img { max-width: 100%; }
+
+        /* ── TYPOGRAPHY HELPERS ────────────────────────── */
+        .section-heading {
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text-dark);
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .section-heading.text-uppercase {
+            letter-spacing: 2px;
+            font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+        }
+        .section-subheading {
+            color: var(--text-muted);
+            font-size: 15px;
+            font-weight: 400;
+            margin-bottom: 40px;
+            display: block;
+        }
+        .text-primary { color: var(--primary) !important; }
+
+        /* ── BUTTONS ───────────────────────────────────── */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border: none;
+            font-family: var(--font-body);
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-radius: var(--radius-pill);
+            padding: 14px 36px;
+            color: #fff;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 18px rgba(232,65,127,0.35);
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--primary) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(232,65,127,0.45);
+            color: #fff;
+        }
+        .btn-xl {
+            padding: 18px 40px;
+            font-size: 15px;
+            letter-spacing: 1px;
+        }
+        .btn-outline-pink {
+            display: inline-block;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 13px 32px;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        .btn-outline-pink:hover {
+            background: var(--primary);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* ── PAGE SECTION ──────────────────────────────── */
+        .page-section { padding: 88px 0; }
+
+        /* ── TOPBAR ────────────────────────────────────── */
+        #topbar {
+            background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 100%);
+            color: rgba(255,255,255,0.9);
+            font-size: 12px;
+            font-weight: 600;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            letter-spacing: 0.5px;
+        }
+        #topbar .ticker-wrap {
+            display: flex;
+            gap: 3rem;
+            white-space: nowrap;
+            animation: ticker 28s linear infinite;
+            padding-left: 100%;
+        }
+        @keyframes ticker {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+        }
+
+        /* ── NAVBAR ────────────────────────────────────── */
+        #mainNav {
+            background: rgba(255,255,255,0.97);
+            backdrop-filter: blur(12px);
+            top: 36px;
+            border-bottom: 1px solid var(--border);
+            transition: top 0.3s ease, box-shadow 0.3s ease;
+            padding: 12px 0;
+        }
+        #mainNav.scrolled {
+            top: 0;
+            box-shadow: 0 4px 24px rgba(232,65,127,0.12);
+        }
+        .navbar-brand {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+            color: var(--primary) !important;
+            letter-spacing: -1px;
+            font-weight: 700;
+        }
+        .nav-link {
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-dark) !important;
+            padding: 6px 12px !important;
+            border-radius: var(--radius-pill);
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .nav-link:hover { color: var(--primary) !important; background: var(--primary-pale); }
+        .nav-link.active { color: var(--primary) !important; }
+        .nav-shop-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #fff !important;
+            padding: 8px 20px !important;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 4px 14px rgba(232,65,127,0.30);
+            transition: all 0.3s !important;
+        }
+        .nav-shop-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(232,65,127,0.45) !important;
+        }
+        .navbar-toggler { border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 6px 12px; }
+        .navbar-toggler:focus { box-shadow: none; }
+
+        /* ── MASTHEAD ──────────────────────────────────── */
+        .masthead {
+            background: linear-gradient(150deg, #FFF8FB 0%, #FFF0F6 40%, #FFDFF0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+        .masthead::before {
+            content: '';
+            position: absolute;
+            top: -120px; right: -120px;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232,65,127,0.09) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .masthead-subheading {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .masthead-subheading::before {
+            content: '';
+            display: inline-block;
+            width: 32px; height: 2px;
+            background: var(--primary);
+        }
+        .masthead-heading {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 700;
+            line-height: 1.08;
+            color: var(--text-dark);
+            margin-bottom: 24px;
+        }
+        .masthead-heading em { font-style: italic; color: var(--primary); }
+        .masthead-desc {
+            font-size: 16px;
+            color: var(--text-mid);
+            line-height: 1.8;
+            max-width: 500px;
+            margin-bottom: 36px;
+        }
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 28px;
+            font-size: 13px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .hero-trust span { display: flex; align-items: center; gap: 6px; }
+        .hero-trust i { color: var(--primary); font-size: 15px; }
+
+        /* Hero image collage */
+        .hero-visual {
+            position: relative;
+            height: 480px;
+        }
+        .hero-img-main {
+            position: absolute;
+            top: 20px; left: 50%;
+            transform: translateX(-50%);
+            width: 220px; height: 300px;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            z-index: 3;
+            background: linear-gradient(145deg, var(--primary-soft), #FFAECF);
+        }
+        .hero-img-main img { width:100%; height:100%; object-fit:cover; display:block; }
+        .hero-img-sm {
+            position: absolute;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            z-index: 2;
+        }
+        .hero-img-sm img { width:100%; height:100%; object-fit:cover; display:block; }
+        .him-1 { width:110px; height:120px; top:0; left:20px; background: linear-gradient(145deg,#FFE8F3,#FFD0E8); }
+        .him-2 { width:100px; height:100px; bottom:60px; left:10px; background: linear-gradient(145deg,#FFF5FA,#FFE4F3); }
+        .him-3 { width:110px; height:130px; top:10px; right:10px; background: linear-gradient(145deg,#E3F2FD,#BBDEFB); }
+        .him-4 { width:100px; height:110px; bottom:50px; right:20px; background: linear-gradient(145deg,#FCE4EC,#F8BBD0); }
+        .hero-badge-float {
+            position: absolute;
+            background: #fff;
+            border-radius: 14px;
+            box-shadow: var(--shadow-md);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-dark);
+            white-space: nowrap;
+            z-index: 5;
+        }
+        .hero-badge-float .label { font-size: 10px; color: var(--text-muted); font-weight: 500; }
+        .hero-badge-float .value { font-size: 14px; color: var(--primary); font-weight: 700; }
+        .hero-badge-rating { top: 60px; right: -10px; }
+        .hero-badge-ship   { bottom: 100px; left: -10px; }
+
+        /* ── SERVICES (Agency fa-stack pattern) ─────────── */
+        #services { background: var(--white); }
+        .fa-stack .fa-circle { color: var(--primary); }
+        .svc-block .fa-stack {
+            transition: transform 0.3s ease;
+        }
+        .svc-block:hover .fa-stack {
+            transform: scale(1.1) translateY(-4px);
+        }
+        .svc-block h4.my-3 {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+        .svc-block p.text-muted {
+            font-size: 14px;
+            color: var(--text-muted) !important;
+            line-height: 1.65;
+        }
+
+        /* ── PORTFOLIO (Agency portfolio-item pattern) ───── */
+        #portfolio { background: var(--rose-bg); }
+        .portfolio-item {
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s, transform 0.3s;
+        }
+        .portfolio-item:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+        }
+        .portfolio-link {
+            display: block;
+            position: relative;
+            overflow: hidden;
+        }
+        .portfolio-link img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .portfolio-item:hover .portfolio-link img { transform: scale(1.06); }
+        .portfolio-hover {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(232,65,127,0.85) 0%, rgba(194,24,91,0.9) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .portfolio-item:hover .portfolio-hover { opacity: 1; }
+        .portfolio-hover-content { color: #fff; }
+        .portfolio-caption {
+            background: #fff;
+            padding: 14px 18px;
+        }
+        .portfolio-caption-heading {
+            font-family: var(--font-body);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 3px;
+        }
+        .portfolio-caption-subheading { font-size: 12px; color: var(--text-muted); }
+
+        /* Fallback for broken images in portfolio */
+        .prod-placeholder {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+        }
+
+        /* ── ABOUT / TIMELINE ──────────────────────────── */
+        #about { background: var(--white); }
+        .timeline {
+            list-style: none;
+            padding: 0;
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0; bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: var(--primary-soft);
+            margin-left: -1px;
+        }
+        .timeline > li { position: relative; margin-bottom: 56px; }
+        .timeline > li::after { content: ''; display: table; clear: both; }
+        .timeline-panel {
+            float: left;
+            width: 42%;
+            padding: 0 28px 20px 0;
+            text-align: right;
+        }
+        .timeline-inverted .timeline-panel {
+            float: right;
+            text-align: left;
+            padding: 0 0 20px 28px;
+        }
+        .timeline-image {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            z-index: 10;
+            border: 4px solid var(--primary-pale);
+            box-shadow: 0 4px 16px rgba(232,65,127,0.25);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .timeline-image img { width:100%; height:100%; object-fit:cover; display:block; }
+        .timeline-image h4 {
+            color: #fff;
+            font-family: var(--font-body);
+            font-size: 13px;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.3;
+            text-align: center;
+        }
+        .timeline-heading h4 {
+            font-family: var(--font-body);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .timeline-heading .subheading {
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .timeline-body p { font-size: 14px; color: var(--text-mid); line-height: 1.65; margin: 0; }
+        @media (max-width: 767px) {
+            .timeline::before { left: 50px; }
+            .timeline-panel,
+            .timeline-inverted .timeline-panel {
+                float: right;
+                width: calc(100% - 110px);
+                text-align: left;
+                padding: 0 0 16px 20px;
+            }
+            .timeline-image { left: 0; transform: none; width: 80px; height: 80px; }
+        }
+
+        /* ── TEAM / BRAND (Agency team-member pattern) ───── */
+        #team { background: var(--rose-bg); }
+        .team-member { text-align: center; margin-bottom: 40px; }
+        .team-member img {
+            width: 180px; height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+            border: 4px solid var(--border);
+            transition: all 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+        .team-member:hover img {
+            border-color: var(--primary);
+            box-shadow: 0 8px 32px rgba(232,65,127,0.25);
+            transform: translateY(-4px);
+        }
+        .team-member h4 {
+            font-family: var(--font-body);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 4px;
+        }
+        .team-member p { font-size: 13px; color: var(--text-muted); margin-bottom: 14px; }
+        .btn-social {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn-dark.btn-social {
+            background: rgba(42,26,34,0.08);
+            color: var(--text-dark) !important;
+            border: none;
+        }
+        .btn-dark.btn-social:hover {
+            background: var(--primary);
+            color: #fff !important;
+            transform: scale(1.15);
+        }
+
+        /* ── CLIENTS STRIP ─────────────────────────────── */
+        #clients { background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+        .client-logo-box {
+            max-width: 150px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            border-radius: var(--radius-md);
+            background: var(--pink-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+        .client-logo-box:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-3px);
+        }
+        .client-logo-box span {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        /* ── CONTACT (Agency form pattern) ─────────────── */
+        #contact { background: linear-gradient(135deg, #FFF0F6 0%, #FDF4F8 100%); }
+        .form-group { margin-bottom: 16px; }
+        .form-control {
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            padding: 14px 18px;
+            font-size: 14px;
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .form-control::placeholder { color: var(--text-muted); }
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(232,65,127,0.12);
+            outline: none;
+        }
+        .form-group-textarea .form-control {
+            height: 100%;
+            min-height: 178px;
+            resize: none;
+        }
+        .contact-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 48px;
+        }
+        .contact-chip {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-pill);
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-dark);
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-chip i { color: var(--primary); }
+
+        /* ── FOOTER ────────────────────────────────────── */
+        footer { background: var(--text-dark); padding: 28px 0; }
+        footer .copy { color: rgba(255,255,255,0.45); font-size: 13px; }
+        footer .footer-link { color: rgba(255,255,255,0.45); font-size: 13px; transition: color 0.2s; }
+        footer .footer-link:hover { color: var(--primary-light); }
+        .btn-social-footer {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.6) !important;
+            border: none;
+            transition: all 0.2s;
+        }
+        .btn-social-footer:hover { background: var(--primary); color: #fff !important; transform: scale(1.1); }
+
+        /* ── PORTFOLIO MODALS ──────────────────────────── */
+        .portfolio-modal { padding-right: 0 !important; }
+        .portfolio-modal .modal-dialog { max-width: 680px; margin: 1.5rem auto; }
+        .portfolio-modal .modal-content { border: none; border-radius: var(--radius-lg); overflow: hidden; }
+        .portfolio-modal .close-modal {
+            position: absolute;
+            top: 14px; right: 14px;
+            width: 36px; height: 36px;
+            background: rgba(232,65,127,0.10);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; z-index: 20;
+            font-size: 16px; color: var(--primary);
+            transition: background 0.2s;
+        }
+        .portfolio-modal .close-modal:hover { background: var(--primary); color: #fff; }
+        .portfolio-modal .modal-body { padding: 40px 36px 36px; }
+        .portfolio-modal .modal-body h2 {
+            font-family: var(--font-body);
+            font-size: 18px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            margin-bottom: 8px; color: var(--text-dark);
+        }
+        .portfolio-modal .item-intro { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+        .portfolio-modal .modal-img {
+            width: 100%; height: 240px;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            display: block;
+        }
+        .portfolio-modal .modal-img-placeholder {
+            width: 100%; height: 240px;
+            border-radius: var(--radius-md);
+            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 5rem;
+        }
+        .portfolio-modal .list-inline { margin-bottom: 24px; }
+        .portfolio-modal .list-inline-item { margin-right: 14px; font-size: 14px; color: var(--text-mid); display: inline-block; margin-bottom: 6px; }
+
+        /* ── SCROLLBAR ─────────────────────────────────── */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--primary-soft); border-radius: 4px; }
+    </style>
+</head>
+<body id="page-top">
+
+    <!-- ─────────────── TOPBAR ─────────────────────── -->
+    <div id="topbar">
+        <div class="ticker-wrap">
+            <span>✦ Gratis Ongkir ke Seluruh Indonesia</span>
+            <span>✦ 5.000+ Produk 100% Original & BPOM</span>
+            <span>✦ SOCO Points untuk Setiap Pembelian</span>
+            <span>✦ 300+ Brand Terpercaya</span>
+            <span>✦ Gratis Ongkir ke Seluruh Indonesia</span>
+            <span>✦ 5.000+ Produk 100% Original & BPOM</span>
+        </div>
+    </div>
+
+    <!-- ─────────────── NAVBAR ─────────────────────── -->
+    <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand" href="#page-top">sociolla</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                Menu <i class="fas fa-bars ms-1" style="color:var(--primary);"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav text-uppercase ms-auto py-4 py-lg-0 align-items-lg-center gap-1">
+                    <li class="nav-item"><a class="nav-link" href="#services">Kategori</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Brand</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-2">
+                        <a class="nav-link nav-shop-btn" href="#">Shop Now</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ─────────────── MASTHEAD ─────────────────────── -->
+    <!-- Agency pattern: header.masthead -->
+    <header class="masthead">
+        <div class="container">
+            <div class="row align-items-center gy-5">
+
+                <div class="col-lg-6" data-aos="fade-right" data-aos-duration="800">
+                    <div class="masthead-subheading">#1 Beauty Destination Indonesia</div>
+                    <h1 class="masthead-heading">
+                        Your Beauty,<br>
+                        <em>Our Passion.</em>
+                    </h1>
+                    <p class="masthead-desc">
+                        Temukan 5.000+ produk kecantikan 100% BPOM & original dari 300+ brand terpercaya.
+                        Skincare, makeup, haircare — semua ada di sini, dikirim ke seluruh Indonesia.
+                    </p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#portfolio" class="btn btn-primary btn-xl text-uppercase">Explore Produk ✨</a>
+                        <a href="#services" class="btn-outline-pink">Lihat Kategori</a>
+                    </div>
+                    <div class="hero-trust">
+                        <span><i class="bi bi-shield-check"></i> 100% Original</span>
+                        <span><i class="bi bi-patch-check"></i> BPOM Certified</span>
+                        <span><i class="bi bi-truck"></i> Gratis Ongkir</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 d-none d-lg-block" data-aos="fade-left" data-aos-duration="900">
+                    <div class="hero-visual">
+                        <!-- Main center image -->
+                        <div class="hero-img-main">
+                            <img src="assets/img/hero-main.jpg" alt="Beauty products"
+                                 onerror="this.style.display='none';" />
+                        </div>
+                        <!-- Small surrounding images -->
+                        <div class="hero-img-sm him-1">
+                            <img src="assets/img/hero-sm-1.jpg" alt="Skincare"
+                                 onerror="this.style.display='none';" />
+                        </div>
+                        <div class="hero-img-sm him-2">
+                            <img src="assets/img/hero-sm-2.jpg" alt="Makeup"
+                                 onerror="this.style.display='none';" />
+                        </div>
+                        <div class="hero-img-sm him-3">
+                            <img src="assets/img/hero-sm-3.jpg" alt="Serum"
+                                 onerror="this.style.display='none';" />
+                        </div>
+                        <div class="hero-img-sm him-4">
+                            <img src="assets/img/hero-sm-4.jpg" alt="Lipstick"
+                                 onerror="this.style.display='none';" />
+                        </div>
+                        <!-- Floating badges -->
+                        <div class="hero-badge-float hero-badge-rating">
+                            <div style="font-size:22px;">⭐</div>
+                            <div>
+                                <div class="label">Rating Rata-Rata</div>
+                                <div class="value">4.9 / 5.0</div>
+                            </div>
+                        </div>
+                        <div class="hero-badge-float hero-badge-ship">
+                            <div style="font-size:22px;">🚚</div>
+                            <div>
+                                <div class="label">Pengiriman</div>
+                                <div class="value">GRATIS</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- ─────────────── SERVICES / KATEGORI ──────────── -->
+    <!-- Agency pattern: fa-stack fa-4x dengan 3 kolom -->
+    <section class="page-section" id="services">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-heading text-uppercase">Kategori Produk</h2>
+                <h3 class="section-subheading text-muted">Temukan semua kebutuhan kecantikanmu dalam satu tempat.</h3>
+            </div>
+            <div class="row text-center" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="col-md-4 svc-block">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-droplet fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Skincare</h4>
+                    <p class="text-muted">1.200+ produk perawatan kulit terlengkap — dari cleanser, toner, serum, hingga sunscreen dari brand lokal & internasional terpercaya.</p>
+                </div>
+
+                <div class="col-md-4 svc-block">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-wand-magic-sparkles fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Makeup</h4>
+                    <p class="text-muted">900+ produk riasan lokal & internasional. Foundation, lipstik, eyeshadow — tampil cantik setiap hari dengan koleksi terlengkap.</p>
+                </div>
+
+                <div class="col-md-4 svc-block">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-wind fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Hair Care</h4>
+                    <p class="text-muted">400+ produk perawatan rambut terbaik. Sampo, kondisioner, hair mask, dan treatment untuk semua jenis rambut.</p>
+                </div>
+
+                <div class="col-md-4 svc-block mt-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-spa fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Body Care</h4>
+                    <p class="text-muted">600+ produk perawatan tubuh lengkap. Body lotion, body scrub, body wash untuk kulit halus dan lembap sepanjang hari.</p>
+                </div>
+
+                <div class="col-md-4 svc-block mt-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-spray-can fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Parfum</h4>
+                    <p class="text-muted">250+ koleksi parfum pilihan terbaik dari brand internasional ternama hingga brand lokal eksklusif dengan aroma memukau.</p>
+                </div>
+
+                <div class="col-md-4 svc-block mt-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fas fa-brush fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="my-3">Beauty Tools</h4>
+                    <p class="text-muted">300+ alat kecantikan & aksesoris beauty. Kuas makeup, face roller, gua sha, dan berbagai tools untuk rutinitas kecantikanmu.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ─────────────── PORTFOLIO / PRODUK ───────────── -->
+    <!-- Agency pattern: portfolio-item + portfolio-hover + portfolio-link + modal -->
+    <section class="page-section" id="portfolio">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-heading text-uppercase">Produk Terlaris</h2>
+                <h3 class="section-subheading text-muted">Best seller minggu ini yang paling banyak dibeli dan direkomendasikan.</h3>
+            </div>
+            <div class="row" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal1">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img src="assets/img/prod-curology.jpg" alt="Curology"
+                                 onerror="this.outerHTML='<div class=\'prod-placeholder\' style=\'background:linear-gradient(135deg,#FFE8EF,#FFD6E7);\'>🧴</div>';" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Curology Moisturizing Lotion</div>
+                            <div class="portfolio-caption-subheading text-muted">Skincare &nbsp;·&nbsp; ★★★★★ 4.9 &nbsp;·&nbsp; <strong style="color:var(--primary);">Rp 142.000</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal2">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img src="assets/img/prod-somebymi.jpg" alt="Some By Mi"
+                                 onerror="this.outerHTML='<div class=\'prod-placeholder\' style=\'background:linear-gradient(135deg,#E8F5E9,#C8E6C9);\'>💚</div>';" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Some By Mi AHA·BHA·PHA Toner</div>
+                            <div class="portfolio-caption-subheading text-muted">Skincare &nbsp;·&nbsp; ★★★★★ 4.8 &nbsp;·&nbsp; <strong style="color:var(--primary);">Rp 165.000</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 mb-4">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal3">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img src="assets/img/prod-wardah.jpg" alt="Wardah"
+                                 onerror="this.outerHTML='<div class=\'prod-placeholder\' style=\'background:linear-gradient(135deg,#E3F2FD,#BBDEFB);\'>🌿</div>';" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Wardah White Secret Day Cream</div>
+                            <div class="portfolio-caption-subheading text-muted">Skincare &nbsp;·&nbsp; ★★★★☆ 4.6 &nbsp;·&nbsp; <strong style="color:var(--primary);">Rp 45.000</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal4">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img src="assets/img/prod-theordinary.jpg" alt="The Ordinary"
+                                 onerror="this.outerHTML='<div class=\'prod-placeholder\' style=\'background:linear-gradient(135deg,#F3E5F5,#E1BEE7);\'>🔬</div>';" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">The Ordinary Niacinamide Serum</div>
+                            <div class="portfolio-caption-subheading text-muted">Skincare &nbsp;·&nbsp; ★★★★★ 4.9 &nbsp;·&nbsp; <strong style="color:var(--primary);">Rp 149.000</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6 mb-4 mb-sm-0">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal5">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img src="assets/img/prod-emina.jpg" alt="Emina"
+                                 onerror="this.outerHTML='<div class=\'prod-placeholder\' style=\'background:linear-gradient(135deg,#FFF8E1,#FFECB3);\'>✨</div>';" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Emina Blur Face Powder</div>
+                            <div class="portfolio-caption-subheading text-muted">Makeup &nbsp;·&nbsp; ★★★★★ 4.7 &nbsp;·&nbsp; <strong style="color:var(--primary);">Rp 55.000</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-sm-6">
+                    <div class="portfolio-item">
+                        <a class="portfolio-link" data-bs-toggle="modal" href="#portfolioModal6">
+                            <div class="portfolio-hover">
+                                <div class="portfolio-hover-content"><i class="fas fa-plus fa-3x"></i></div>
+                            </div>
+                            <img src="assets/img/prod-laneige.jpg" alt="Laneige"
+                                 onerror="this.outerHTML='<div class=\'prod-placeholder\' style=\'background:linear-gradient(135deg,#FCE4EC,#F8BBD0);\'>💋</div>';" />
+                        </a>
+                        <div class="portfolio-caption">
+                            <div class="portfolio-caption-heading">Laneige Lip Sleeping Mask Berry</div>
+                            <div class="portfolio-caption-subheading text-muted">Skincare &nbsp;·&nbsp; ★★★★★ 4.9 &nbsp;·&nbsp; <strong style="color:var(--primary);">Rp 220.000</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="#" class="btn-outline-pink">Lihat Semua Produk &rarr;</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─────────────── ABOUT / TIMELINE ─────────────── -->
+    <!-- Agency pattern: timeline dengan gambar di lingkaran -->
+    <section class="page-section" id="about">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-heading text-uppercase">Perjalanan Sociolla</h2>
+                <h3 class="section-subheading text-muted">Dari startup kecantikan menjadi platform beauty No. 1 Indonesia.</h3>
+            </div>
+            <ul class="timeline">
+
+                <li>
+                    <div class="timeline-image">
+                        <img src="assets/img/about-main.jpg" alt="2015"
+                             onerror="this.outerHTML='<h4>2015</h4>';" />
+                    </div>
+                    <div class="timeline-panel" data-aos="fade-right">
+                        <div class="timeline-heading">
+                            <h4>2015 — Lahirnya Sociolla</h4>
+                            <span class="subheading">Memulai dari Mimpi</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Sociolla didirikan dengan visi menghadirkan produk kecantikan 100% original ke seluruh Indonesia. Dimulai dengan ratusan SKU dari brand internasional pilihan.</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <img src="assets/img/soco-timeline.png" alt="2017"
+                             onerror="this.outerHTML='<h4>2017</h4>';" />
+                    </div>
+                    <div class="timeline-panel" data-aos="fade-left">
+                        <div class="timeline-heading">
+                            <h4>2017 — SOCO Lahir</h4>
+                            <span class="subheading">Komunitas Beauty Indonesia</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Peluncuran SOCO, platform review kecantikan pertama di Indonesia. Beauty enthusiast bisa berbagi review jujur berdasarkan jenis kulit dan kebutuhan masing-masing.</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="timeline-image">
+                        <img src="assets/img/sociolla-timeline2.png" alt="2019"
+                             onerror="this.outerHTML='<h4>2019</h4>';" />
+                    </div>
+                    <div class="timeline-panel" data-aos="fade-right">
+                        <div class="timeline-heading">
+                            <h4>2019 — Ekspansi Offline</h4>
+                            <span class="subheading">Beauty Space Hadir di Mall</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Sociolla membuka Beauty Space pertama di Jakarta. Konsep toko offline yang memungkinkan pelanggan mencoba dan merasakan produk secara langsung sebelum membeli.</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <img src="assets/img/sociolla-timeline3.webp" alt="2024"
+                             onerror="this.outerHTML='<h4>2024</h4>';" />
+                    </div>
+                    <div class="timeline-panel" data-aos="fade-left">
+                        <div class="timeline-heading">
+                            <h4>2024 — No. 1 Beauty Platform</h4>
+                            <span class="subheading">8 Juta+ SOCO Members</span>
+                        </div>
+                        <div class="timeline-body">
+                            <p>Kini Sociolla hadir di 60+ kota dengan 150+ Beauty Space, 5.000+ produk, dan 8 juta SOCO Members aktif. Platform kecantikan terbesar dan terpercaya di Indonesia.</p>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="timeline-inverted">
+                    <div class="timeline-image">
+                        <h4 style="font-size:11px;line-height:1.4;">Be Part<br>Of Our<br>Story!</h4>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </section>
+
+    <!-- ─────────────── TEAM / BRAND UNGGULAN ─────────── -->
+    <!-- Agency pattern: team-member dengan rounded-circle + social buttons -->
+    <section class="page-section" id="team">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-heading text-uppercase">Brand Unggulan</h2>
+                <h3 class="section-subheading text-muted">300+ brand terpercaya, lokal & internasional, semua tersedia di Sociolla.</h3>
+            </div>
+            <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="assets/img/prod-curology.jpg" alt="Curology"
+                             onerror="this.style.background='linear-gradient(135deg,#FFE8EF,#FFD6E7)'; this.src='';" />
+                        <h4>Curology</h4>
+                        <p class="text-muted">Skincare Dermatologi</p>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Curology Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Curology TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Curology Website"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="assets/img/prod-somebymi.jpg" alt="Some By Mi"
+                             onerror="this.style.background='linear-gradient(135deg,#E8F5E9,#C8E6C9)'; this.src='';" />
+                        <h4>Some By Mi</h4>
+                        <p class="text-muted">K-Beauty Skincare</p>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Some By Mi Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Some By Mi TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Some By Mi Website"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6">
+                    <div class="team-member">
+                        <img class="mx-auto rounded-circle" src="assets/img/prod-wardah.jpg" alt="Wardah"
+                             onerror="this.style.background='linear-gradient(135deg,#E3F2FD,#BBDEFB)'; this.src='';" />
+                        <h4>Wardah</h4>
+                        <p class="text-muted">Brand Lokal Halal No. 1</p>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Wardah Instagram"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Wardah TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!" aria-label="Wardah Website"><i class="fas fa-globe"></i></a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center" data-aos="fade-up">
+                    <p class="large text-muted" style="font-size:14px;">
+                        Dan 297+ brand lainnya — lokal maupun internasional — tersedia lengkap di Sociolla dengan jaminan 100% original dan BPOM certified.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ─────────────── CLIENTS / BRAND STRIP ────────── -->
+    <!-- Agency pattern: clients logo row -->
+    <div class="py-5" id="clients">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-md-3 col-sm-6 my-3 text-center">
+                    <div class="client-logo-box"><span>Laneige</span></div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-3 text-center">
+                    <div class="client-logo-box"><span>The Ordinary</span></div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-3 text-center">
+                    <div class="client-logo-box"><span>Emina</span></div>
+                </div>
+                <div class="col-md-3 col-sm-6 my-3 text-center">
+                    <div class="client-logo-box"><span>SOCO</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─────────────── CONTACT ──────────────────────── -->
+    <!-- Agency pattern: form kontak dengan name, email, phone, message -->
+    <section class="page-section" id="contact">
+        <div class="container">
+            <div class="text-center" data-aos="fade-up">
+                <h2 class="section-heading text-uppercase">Hubungi Kami</h2>
+                <h3 class="section-subheading text-muted">Ada pertanyaan? Tim Sociolla siap membantu kamu.</h3>
+            </div>
+
+            <!-- Contact info chips -->
+            <div class="contact-chips" data-aos="fade-up">
+                <div class="contact-chip"><i class="fas fa-envelope"></i> hello@sociolla.com</div>
+                <div class="contact-chip"><i class="fab fa-whatsapp"></i> +62 811-1234-5678</div>
+                <div class="contact-chip"><i class="fab fa-instagram"></i> @sociolla</div>
+            </div>
+
+            <!-- Form (Agency pattern) -->
+            <form id="contactForm" data-aos="fade-up" data-aos-delay="100">
+                <div class="row align-items-stretch mb-5">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input class="form-control" id="name" type="text" placeholder="Nama Lengkap *" required />
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="email" type="email" placeholder="Alamat Email *" required />
+                        </div>
+                        <div class="form-group mb-md-0">
+                            <input class="form-control" id="phone" type="tel" placeholder="Nomor WhatsApp *" required />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group form-group-textarea mb-md-0">
+                            <textarea class="form-control" id="message" placeholder="Pesan kamu... *" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary btn-xl text-uppercase" type="submit" id="submitButton">
+                        <i class="fas fa-paper-plane me-2"></i>Kirim Pesan
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- ─────────────── FOOTER ────────────────────────── -->
+    <footer>
+        <div class="container">
+            <div class="row align-items-center gy-3">
+                <div class="col-lg-4 text-lg-start text-center">
+                    <span class="copy">&copy; 2025 Sociolla – PT Social Bella Indonesia</span>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <a class="btn btn-social-footer mx-1" href="#!"><i class="fab fa-instagram"></i></a>
+                    <a class="btn btn-social-footer mx-1" href="#!"><i class="fab fa-tiktok"></i></a>
+                    <a class="btn btn-social-footer mx-1" href="#!"><i class="fab fa-youtube"></i></a>
+                    <a class="btn btn-social-footer mx-1" href="#!"><i class="fab fa-facebook-f"></i></a>
+                </div>
+                <div class="col-lg-4 text-lg-end text-center">
+                    <a class="footer-link me-3" href="#!">Privacy Policy</a>
+                    <a class="footer-link" href="#!">Terms of Use</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ─────────────── PORTFOLIO MODALS (Agency style) ── -->
+
+    <!-- Modal 1: Curology -->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><i class="fas fa-xmark"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Curology Moisturizing Lotion</h2>
+                                <p class="item-intro text-muted">Pelembab ringan untuk semua jenis kulit, cocok digunakan sehari-hari.</p>
+                                <img class="modal-img" src="assets/img/prod-curology.jpg" alt="Curology"
+                                     onerror="this.outerHTML='<div class=\'modal-img-placeholder\' style=\'background:linear-gradient(135deg,#FFE8EF,#FFD6E7);\'>🧴</div>';" />
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><strong>Brand:</strong> Curology</li>
+                                    <li class="list-inline-item"><strong>Kategori:</strong> Skincare</li>
+                                    <li class="list-inline-item"><strong>Rating:</strong> ★★★★★ 4.9 (1.2k ulasan)</li>
+                                    <li class="list-inline-item"><strong>Harga:</strong> <s style="color:#bbb;">Rp 189.000</s> <strong style="color:var(--primary);">Rp 142.000</strong></li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-bag-shopping me-1"></i> Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Some By Mi -->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><i class="fas fa-xmark"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Some By Mi AHA·BHA·PHA Toner</h2>
+                                <p class="item-intro text-muted">Toner eksfoliasi 3-in-1 untuk kulit lebih cerah dan bebas jerawat dalam 30 hari.</p>
+                                <img class="modal-img" src="assets/img/prod-somebymi.jpg" alt="Some By Mi"
+                                     onerror="this.outerHTML='<div class=\'modal-img-placeholder\' style=\'background:linear-gradient(135deg,#E8F5E9,#C8E6C9);\'>💚</div>';" />
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><strong>Brand:</strong> Some By Mi</li>
+                                    <li class="list-inline-item"><strong>Kategori:</strong> Skincare</li>
+                                    <li class="list-inline-item"><strong>Rating:</strong> ★★★★★ 4.8 (980 ulasan)</li>
+                                    <li class="list-inline-item"><strong>Harga:</strong> <strong style="color:var(--primary);">Rp 165.000</strong></li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-bag-shopping me-1"></i> Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 3: Wardah -->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><i class="fas fa-xmark"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Wardah White Secret Day Cream</h2>
+                                <p class="item-intro text-muted">Krim siang dengan SPF yang melindungi dan mencerahkan kulit sepanjang hari.</p>
+                                <img class="modal-img" src="assets/img/prod-wardah.jpg" alt="Wardah"
+                                     onerror="this.outerHTML='<div class=\'modal-img-placeholder\' style=\'background:linear-gradient(135deg,#E3F2FD,#BBDEFB);\'>🌿</div>';" />
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><strong>Brand:</strong> Wardah</li>
+                                    <li class="list-inline-item"><strong>Kategori:</strong> Skincare</li>
+                                    <li class="list-inline-item"><strong>Rating:</strong> ★★★★☆ 4.6 (2.1k ulasan)</li>
+                                    <li class="list-inline-item"><strong>Harga:</strong> <s style="color:#bbb;">Rp 75.000</s> <strong style="color:var(--primary);">Rp 45.000</strong></li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-bag-shopping me-1"></i> Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 4: The Ordinary -->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><i class="fas fa-xmark"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">The Ordinary Niacinamide Serum</h2>
+                                <p class="item-intro text-muted">Serum niacinamide 10% untuk menyamarkan pori dan meratakan warna kulit.</p>
+                                <img class="modal-img" src="assets/img/prod-theordinary.jpg" alt="The Ordinary"
+                                     onerror="this.outerHTML='<div class=\'modal-img-placeholder\' style=\'background:linear-gradient(135deg,#F3E5F5,#E1BEE7);\'>🔬</div>';" />
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><strong>Brand:</strong> The Ordinary</li>
+                                    <li class="list-inline-item"><strong>Kategori:</strong> Skincare</li>
+                                    <li class="list-inline-item"><strong>Rating:</strong> ★★★★★ 4.9 (3.4k ulasan)</li>
+                                    <li class="list-inline-item"><strong>Harga:</strong> <strong style="color:var(--primary);">Rp 149.000</strong></li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-bag-shopping me-1"></i> Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 5: Emina -->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><i class="fas fa-xmark"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Emina Blur Face Powder</h2>
+                                <p class="item-intro text-muted">Bedak tabur yang menyamarkan pori dan mengontrol minyak seharian.</p>
+                                <img class="modal-img" src="assets/img/prod-emina.jpg" alt="Emina"
+                                     onerror="this.outerHTML='<div class=\'modal-img-placeholder\' style=\'background:linear-gradient(135deg,#FFF8E1,#FFECB3);\'>✨</div>';" />
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><strong>Brand:</strong> Emina</li>
+                                    <li class="list-inline-item"><strong>Kategori:</strong> Makeup</li>
+                                    <li class="list-inline-item"><strong>Rating:</strong> ★★★★★ 4.7 (760 ulasan)</li>
+                                    <li class="list-inline-item"><strong>Harga:</strong> <strong style="color:var(--primary);">Rp 55.000</strong></li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-bag-shopping me-1"></i> Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 6: Laneige -->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="close-modal" data-bs-dismiss="modal"><i class="fas fa-xmark"></i></div>
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="modal-body">
+                                <h2 class="text-uppercase">Laneige Lip Sleeping Mask Berry</h2>
+                                <p class="item-intro text-muted">Masker bibir overnight dengan aroma berry yang melembabkan dan menutrisi bibir.</p>
+                                <img class="modal-img" src="assets/img/prod-laneige.jpg" alt="Laneige"
+                                     onerror="this.outerHTML='<div class=\'modal-img-placeholder\' style=\'background:linear-gradient(135deg,#FCE4EC,#F8BBD0);\'>💋</div>';" />
+                                <ul class="list-inline">
+                                    <li class="list-inline-item"><strong>Brand:</strong> Laneige</li>
+                                    <li class="list-inline-item"><strong>Kategori:</strong> Skincare</li>
+                                    <li class="list-inline-item"><strong>Rating:</strong> ★★★★★ 4.9 (5.2k ulasan)</li>
+                                    <li class="list-inline-item"><strong>Harga:</strong> <strong style="color:var(--primary);">Rp 220.000</strong></li>
+                                </ul>
+                                <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
+                                    <i class="fas fa-bag-shopping me-1"></i> Beli Sekarang
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ─────────────── SCRIPTS ───────────────────────── -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        // AOS
+        AOS.init({ duration: 750, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+        // Navbar scroll behavior
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        });
+
+        // Active nav highlight on scroll
+        const sections = document.querySelectorAll('section[id], header[id]');
+        const navLinks = document.querySelectorAll('#navbarResponsive .nav-link');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    navLinks.forEach(link => {
+                        link.classList.remove('active');
+                        if (link.getAttribute('href') === '#' + entry.target.id) {
+                            link.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, { threshold: 0.4 });
+        sections.forEach(s => observer.observe(s));
+
+        // Contact form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submitButton');
+            btn.innerHTML = '<i class="fas fa-check me-2"></i>Terkirim!';
+            btn.style.background = 'linear-gradient(135deg, #4CAF50, #388E3C)';
+            btn.disabled = true;
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-paper-plane me-2"></i>Kirim Pesan';
+                btn.style.background = '';
+                btn.disabled = false;
+                this.reset();
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>
